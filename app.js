@@ -20,7 +20,9 @@ mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/seefilm", {
   useNewUrlParser: true,
   useUnifiedTopology: true
-});
+}).then(res => console.log("connected"))
+.catch(err => console.log(err));
+;
 
 // handlebars
   app.engine('handlebars', exphbs({
@@ -49,6 +51,6 @@ app.get('/find', (req, res) => {
 
 const port = 4000;
 
-app.listen(port, () =>{
+app.listen(process.env.PORT || port, () =>{
   console.log(`Mike: Server started on port ${port}`);
 });
