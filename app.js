@@ -3,6 +3,13 @@ const exphbs  = require('express-handlebars');
 const methodOverride = require('method-override')
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const passport = require('passport');
+
+
+require('./config/passport')(passport);
+
+//
+const auth = require('./routes/auth');
 
 const app = express();
 
@@ -25,7 +32,8 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
+// Use Routes
+app.use('/auth', auth);
 
 // index
 app.get('/', (req, res) => {
