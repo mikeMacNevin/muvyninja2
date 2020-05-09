@@ -1,0 +1,29 @@
+
+
+
+<div class="container">
+
+  <h2>Select a Movie</h2>
+  <h3>Choose Filters</h3>
+
+  <form class="form-inline my-4" method ="POST" action="/search">
+      <label class="sr-only" for="inlineFormInputName2">Name</label>
+      <input type="text" class="form-control mb-2 mr-sm-2" name="movieTitle" id="movieTitle" placeholder="Rush Hour 2">
+      <button type="submit" class="btn btn-primary mb-2">Submit</button>    
+  </form>
+
+    <form class="form-inline">
+      <label class="sr-only" for="inlineFormInputName2">Name</label>
+
+      <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="1905">
+
+      <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="2020">
+
+      <button type="submit" class="btn btn-primary mb-2">Submit</button>
+      
+    </form>
+
+
+    {{movie}}
+
+</div>
