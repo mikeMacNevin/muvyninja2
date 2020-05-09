@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+    {{#each movies}}
+        
+        {{#if poster_path }}
+
+        <div class="col-6 col-md-4 col-xl-3"> 
+            <div class="card my-2">
+                <img class="card-img-top" src="http://image.tmdb.org/t/p/w185/{{ poster_path }}" alt="Card image cap">
+                <div class="card-body text-center">
+                    <h5 class="card-title">{{original_title}}</h5>
+                    <p class="card-text text-justify">{{overview}}</p>
+                    <a href="#" class="btn">Add to Favorites</a>
+                </div>
+            </div>
+        </div>
+        {{/if}}
+
+        
+    {{/each}}
+    </div> 
+</div>

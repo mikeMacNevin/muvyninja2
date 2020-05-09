@@ -1,0 +1,8 @@
+.card {
+    background-color: black;
+    color:white;
+}
+
+card a.btn {
+    background-color: rgba(9,9,121,1);
+}
