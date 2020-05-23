@@ -20,7 +20,7 @@ require('./config/passport')(passport);
 const auth = require('./routes/auth');
 const index = require('./routes/index');
 const browse = require('./routes/browse');
-const search= require('./routes/search');
+const search = require('./routes/search');
 
 // Load Keys
 const keys = require('./config/keys');
@@ -69,11 +69,12 @@ app.use('/', index);
 
 // Use Static Files
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.use('/auth', auth);
 app.use('/browse', browse);
+// app.use('/search', search);
 
 // index
 app.get('/', (req, res) => {
@@ -85,18 +86,31 @@ app.get('/search', (req, res) => {
 });
 
 app.post('/search', (req, res) => {
-  console.log(req.body.movieTitle);
-  let movie = req.body.movieTitle;
+  
+  let movieRes = '';  
 
-  // const url = 'https://api.themoviedb.org/3/discover/movie?api_key=52355b2a478c82d6bfe5a57afff6c916&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1';
+  let movie = '';
+  movie = req.body.movieTitle;
 
-  res.render('search', {
-    'movie' : movie
-  })
-})
-// app.get('/', (req, res) => {
-//   res.render('browse');
-// });
+  //post response movie  
+  const url = `https://api.themoviedb.org/3/search/movie?api_key=52355b2a478c82d6bfe5a57afff6c916&query=${movie}&page=1&include_adult=false`;
+  
+  request(url, function (error, response, body) {
+    movieRes = JSON.parse(body);
+    console.log('movieRes: ' + movieRes);
+    console.log('first original_title: ' + movieRes.results[0].original_title);
+    
+    res.render('search', {
+      'movies' : movieRes.results.slice(1,7),
+      'firstMovie' : movieRes.results[0]
+    })
+  });
+});
+
+
+app.get('/', (req, res) => {
+  res.render('browse');
+});
 
 
 const port = 4000;
